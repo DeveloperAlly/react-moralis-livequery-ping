@@ -1,6 +1,7 @@
 .container {
   min-height: 100vh;
-  padding: 0 0.5rem;
+  /* padding: 0 0.5rem; */
+  padding: 0;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -9,12 +10,15 @@
 }
 
 .main {
-  padding: 5rem 0;
+  padding: 0;
   flex: 1;
   display: flex;
   flex-direction: column;
-  justify-content: center;
-  align-items: center;
+  width: 100vw;
+  overflow-y: auto;
+  overflow-x: hidden;
+  /* justify-content: center;
+  align-items: center; */
 }
 
 .footer {
@@ -24,6 +28,8 @@
   display: flex;
   justify-content: center;
   align-items: center;
+  bottom: 0;
+  padding-bottom: 30px;
 }
 
 .footer a {
@@ -34,7 +40,7 @@
 }
 
 .title a {
-  color: #0070f3;
+  color: #21bf96;
   text-decoration: none;
 }
 
@@ -93,8 +99,8 @@
 .card:hover,
 .card:focus,
 .card:active {
-  color: #0070f3;
-  border-color: #0070f3;
+  color: #21bf96;
+  border-color: #21bf96;
 }
 
 .card h2 {
