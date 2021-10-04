@@ -5,6 +5,7 @@ import { useMoralis } from "react-moralis";
 import StatusMessage from "./StatusMessage";
 import { ConnectedContext } from "../api/utils/connected-context";
 
+//TODO: FIX & watch for events https://docs.moralis.io/moralis-server/web3/web3#events
 const Authentication = () => {
   const { web3, enableWeb3, isWeb3Enabled, web3EnableError } = useMoralis();
   const router = useRouter();
