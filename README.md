@@ -37,7 +37,6 @@ coming soon - PLEASE CLONE FROM DEVELOP BRANCH
 
 ## BugList / To-do List (I welcome PR's :P)
 
-Currently fixing: Live version UI does not refresh on pingquery update
 
 Authorisation needs updating incl. checking on account changes
 
