@@ -43,11 +43,11 @@ React code could use breakdown / refactor to better components and typescript
 ## Resources
 
 
-### Faucets for testnets (check out bnb faucet - it basically uses liveQuery!)
+### Faucets for testnets 
 
 Polygon: https://faucet.polygon.technology/
 
-BSC testnet: https://testnet.binance.org/faucet-smart 
+BSC testnet: https://testnet.binance.org/faucet-smart (check out bnb faucet - it basically uses liveQuery to show most recent addresses that have requested funds!)
 
 Kovan Eth: https://kovan.chain.link/ 
 
