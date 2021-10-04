@@ -1,18 +1,17 @@
-import React, { useContext } from "react";
-import { Container } from "semantic-ui-react";
+import { useState, useEffect } from "react";
 import { useRouter } from "next/router";
-import { Button } from "semantic-ui-react";
+import { Container, Button } from "semantic-ui-react";
 import { useMoralis } from "react-moralis";
-import HeaderLogo from "./HeaderLogo";
 import StatusMessage from "./StatusMessage";
-import { ConnectedContext } from "../api/utils/connected-context";
 
-//Hosts the top level layout of our app
-const Layout = ({ data, checkWalletConnection, ...props }) => {
+const Authentication = ({
+  data,
+  checkWalletConnection,
+  connected,
+  ...props
+}) => {
   const { web3, enableWeb3, isWeb3Enabled, web3EnableError } = useMoralis();
   const router = useRouter();
-  const connected = useContext(ConnectedContext);
-  console.log("connected con", connected);
 
   const renderInstallMetamask = () => {
     return (
@@ -59,9 +58,9 @@ const Layout = ({ data, checkWalletConnection, ...props }) => {
   };
 
   return (
-    <Container fluid style={{ paddingTop: "2em" }}>
-      <HeaderLogo />
+    <Container>
       <Container
+        key={connected}
         style={{
           width: "100%",
           display: "flex",
@@ -92,4 +91,4 @@ const Layout = ({ data, checkWalletConnection, ...props }) => {
   );
 };
 
-export default Layout;
+export default Authentication;

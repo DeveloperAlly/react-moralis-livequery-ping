@@ -10,9 +10,9 @@ const FaucetFunds = () => {
         textAlign="center"
         fluid
         style={{
-          marginTop: "10px",
+          marginTop: "30px",
           display: "flex",
-          flexDirection: "column",
+          flexDirection: "row",
           width: "50%",
         }}
       >
@@ -22,13 +22,13 @@ const FaucetFunds = () => {
           rel="noreferrer"
           style={{ paddingBottom: "10px" }}
         >
-          <Button basic>
+          <Button basic size="small">
             <div style={{ display: "flex", flexDirection: "row" }}>
               <Image
                 src="/bnb.png"
                 alt="Binance Logo"
-                width={20}
-                height={20}
+                width={30}
+                height={30}
                 style={{ marginRight: "10px" }}
               />
               Get testnet BNB funds
@@ -41,16 +41,16 @@ const FaucetFunds = () => {
           rel="noreferrer"
           style={{ paddingBottom: "10px" }}
         >
-          <Button basic>
+          <Button basic size="small">
             <div style={{ display: "flex", flexDirection: "row" }}>
               <Image
                 src="/matic.png"
                 alt="Matic Logo"
-                width={20}
-                height={20}
+                width={30}
+                height={30}
                 style={{ marginRight: "10px" }}
               />
-              Get testnet Polygon funds
+              Get testnet Poly funds
             </div>
           </Button>
         </a>
@@ -60,13 +60,13 @@ const FaucetFunds = () => {
           rel="noreferrer"
           style={{ paddingBottom: "10px" }}
         >
-          <Button basic>
+          <Button basic size="small">
             <div style={{ display: "flex", flexDirection: "row" }}>
               <Image
                 src="/eth.png"
                 alt="Ethereum Logo"
-                width={20}
-                height={20}
+                width={30}
+                height={30}
                 style={{ marginRight: "10px" }}
               />
               Get testnet kETH funds
