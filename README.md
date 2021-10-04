@@ -28,7 +28,9 @@ coming soon - PLEASE CLONE FROM DEVELOP BRANCH
 
 ## Architecture diagrams
 
-![Architecture diagram](https://user-images.githubusercontent.com/12529822/135826475-40cb2f81-bf91-4f78-a79c-2a6a50f456b7.png)
+
+![Architecture diagram](https://user-images.githubusercontent.com/12529822/135826932-09eb6f65-2fb4-420b-a5fd-7c8bf62b090d.png)
+
 
 
 ## BugList / To-do List (I welcome PR's :P)
