@@ -12,7 +12,6 @@ const Layout = ({ data, checkWalletConnection, ...props }) => {
   const { web3, enableWeb3, isWeb3Enabled, web3EnableError } = useMoralis();
   const router = useRouter();
   const connected = useContext(ConnectedContext);
-  console.log("connected con", connected);
 
   const renderInstallMetamask = () => {
     return (

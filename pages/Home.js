@@ -47,7 +47,6 @@ const Home = ({ data, ...props }) => {
     {
       live: true,
       onCreate: (data) => {
-        console.log(`poly ping was just created`, data);
         setLiveEventData({ ...liveEventData, polygon: [data] });
         setLatestPing(data);
       },
@@ -61,7 +60,6 @@ const Home = ({ data, ...props }) => {
     {
       live: true,
       onCreate: (data) => {
-        console.log(`bsc ping was just created`, data);
         setLiveEventData({ ...liveEventData, bsc: [data] });
         setLatestPing(data);
       },
@@ -75,7 +73,6 @@ const Home = ({ data, ...props }) => {
     {
       live: true,
       onCreate: (data) => {
-        console.log(`kovan ping was just created`, data);
         setLiveEventData({ ...liveEventData, kovan: [data] });
         setLatestPing(data);
       },
@@ -83,7 +80,7 @@ const Home = ({ data, ...props }) => {
   );
 
   useEffect(() => {
-    console.log("LIVE", liveEventData, latestPing);
+    // console.log("LIVE", liveEventData, latestPing);
     liveEventData && setCount(calculateTotalPings(liveEventData));
   }, [liveEventData, latestPing]);
 
@@ -116,7 +113,6 @@ const Home = ({ data, ...props }) => {
         ],
       })
       .then((res) => {
-        console.log("changed chains");
         callPing(chain);
       })
       .catch((err) => {
@@ -169,13 +165,10 @@ const Home = ({ data, ...props }) => {
         });
         return;
     }
-    console.log("chain", contractInterface, chainName, blockScanLink, chainID);
 
-    // await web3.eth.getChainId().then((chain) => console.log("CHAINID", chain));
     await web3.eth
       .getAccounts()
       .then(async (accounts) => {
-        console.log("accounts", accounts);
         setTransactionState({
           ...INITIAL_TRANSACTION_STATE,
           loading: "Transaction is processing....",
@@ -187,7 +180,6 @@ const Home = ({ data, ...props }) => {
             from: accounts[0],
           })
           .then((res) => {
-            console.log("PING RES", res);
             const etherscanLink = `${blockScanLink}${res.transactionHash}`;
             setTransactionState({
               ...INITIAL_TRANSACTION_STATE,

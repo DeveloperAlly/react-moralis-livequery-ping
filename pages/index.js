@@ -22,15 +22,14 @@ const Index = (props) => {
       .then(async (addr) => {
         // Set User account into state
         connectedState = Boolean(addr.length > 0);
-        console.log("connected state", connectedState, connected);
+        // console.log("connected state", connectedState, connected);
         if (connectedState !== connected) {
-          console.log("reload");
           router.replace("/");
         }
         setConnected(connectedState);
       })
       .catch((err) => {
-        console.log("connected check error");
+        // console.log("connected check error");
         if (connected !== false) {
           router.replace("/");
         }
