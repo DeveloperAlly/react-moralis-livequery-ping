@@ -33,6 +33,8 @@ coming soon
 
 ## BugList / To-do List (I welcome PR's :P)
 
+Currently fixing: Live version UI does not refresh on pingquery update
+
 Authorisation needs updating incl. checking on account changes
 
 React code needs Context and ErrorBoundary objects & should also bring props in on initial run (server side render some props)
