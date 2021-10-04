@@ -12,22 +12,31 @@ This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next
 
 ## Framework
 
-# Requirements:
+### Requirements:
+
 Node ( https://nodejs.org/ )
+
 Metamask ( https://docs.metamask.io )
+
 Moralis.io account ( https://moralis.io/ )
 
 
-# Faucets for testnets (check out bnb faucet - it basically uses liveQuery!)
+
+### Faucets for testnets (check out bnb faucet - it basically uses liveQuery!)
+
 Polygon: https://faucet.polygon.technology/
+
 BSC testnet: https://testnet.binance.org/faucet-smart 
+
 Kovan Eth: https://kovan.chain.link/ 
 
 
+
 # Handy links for chainIds:
+
 https://chainlist.org/ 
 
-# Docs for used framework
+### Docs for used framework
 Moralis
 Docs: https://docs.moralis.io/ 
 Discord: 
@@ -35,25 +44,36 @@ Forum: https://forum.moralis.io/
 Moralis npm: https://www.npmjs.com/package/moralis 
 React-moralis: https://www.npmjs.com/package/react-moralis & https://github.com/MoralisWeb3/react-moralis & https://docs.moralis.io/moralis-server/tools/react-moralis 
 YouTube: https://www.youtube.com/channel/UCgWS9Q3P5AxCWyQLT2kQhBw 
+
 Solidity lang
 https://docs.soliditylang.org/ 
-Nextjs (not needed)
+
+Nextjs (not needed - have not really used the features that make next cool so you could just use a react app)
 https://nextjs.org/docs
+
 React
 https://reactjs.org/docs 
+
 Truffle
 https://www.trufflesuite.com/ 
 React Semantic-ui (I prefer material-ui though)
 https://react.semantic-ui.com/ 
+
 React-moralis
+
 Metamask
 https://docs.metamask.io/ 
+
 Remix (for testing contracts initially)
 http://remix.ethereum.org/
 
-# Block explorer links
+
+### Block explorer links
+
 Mumbai polygon: https://mumbai.polygonscan.com/ 
+
 Kovan eth: https://kovan.etherscan.io/ 
+
 BSC testnet: https://testnet.bscscan.com/ 
 
 
