@@ -78,7 +78,9 @@ BSC testnet: https://testnet.bscscan.com/
 
 
 
-## Getting Started
+
+
+## Nextjs DOCS - Getting Started
 
 First, run the development server:
 
