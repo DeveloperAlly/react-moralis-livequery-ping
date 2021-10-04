@@ -26,7 +26,7 @@ Moralis.io account ( https://moralis.io/ )
 coming soon - PLEASE CLONE FROM DEVELOP BRANCH
 
 
-## Architecture diagrams
+## Architecture diagram
 
 
 ![Architecture diagram](https://user-images.githubusercontent.com/12529822/135826932-09eb6f65-2fb4-420b-a5fd-7c8bf62b090d.png)
