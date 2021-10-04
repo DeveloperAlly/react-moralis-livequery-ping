@@ -6,7 +6,7 @@ import {
   useMoralisCloudFunction,
 } from "react-moralis";
 import { Container, Header, Button } from "semantic-ui-react";
-import MoralisPing from "../build/contracts/MoralisPing.json";
+import MoralisPing from "./api/contracts/MoralisPing.json";
 import StatusMessage from "./components/StatusMessage";
 import PingTable from "./components/PingTable";
 import { CHAIN_DATA } from "./api/utils/chainData";
