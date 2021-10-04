@@ -1,4 +1,7 @@
 import { useState, useEffect } from "react";
+import Image from "next/image";
+import Head from "next/head";
+import styles from "../styles/Home.module.css";
 import {
   useMoralis,
   useMoralisCloudFunction,
@@ -26,54 +29,6 @@ const Index = (props) => {
   useEffect(() => {
     console.log("latest ping", latestPing);
   }, [latestPing]);
-
-  // useMoralisSubscription(
-  //   "PolygonPing",
-  //   (query) => query.descending("createdAt").limit(1),
-  //   [],
-  //   {
-  //     live: true,
-  //     onCreate: (data) => {
-  //       console.log(`poly ping was just created`, data);
-  //       setLiveEventData({ ...liveEventData, polygon: [data] });
-  //       setLatestPing(data);
-  //       let newCount = count + 1;
-  //       setCount(newCount);
-  //     },
-  //   }
-  // );
-
-  // useMoralisSubscription(
-  //   "BSCPing",
-  //   (query) => query.descending("createdAt").limit(1),
-  //   [],
-  //   {
-  //     live: true,
-  //     onCreate: (data) => {
-  //       console.log(`bsc ping was just created`, data);
-  //       setLiveEventData({ ...liveEventData, bsc: [data] });
-  //       setLatestPing(data);
-  //       let newCount = count + 1;
-  //       setCount(newCount);
-  //     },
-  //   }
-  // );
-
-  // useMoralisSubscription(
-  //   "KovanPing",
-  //   (query) => query.descending("createdAt").limit(1),
-  //   [],
-  //   {
-  //     live: true,
-  //     onCreate: (data) => {
-  //       console.log(`kovan ping was just created`, data);
-  //       setLiveEventData({ ...liveEventData, kovan: [data] });
-  //       setLatestPing(data);
-  //       let newCount = count + 1;
-  //       setCount(newCount);
-  //     },
-  //   }
-  // );
 
   const checkWalletConnection = async () => {
     let connectedState;
@@ -145,21 +100,48 @@ const Index = (props) => {
   }, [data]);
 
   return (
-    <Layout
-      data={props}
-      connected={connected}
-      checkWalletConnection={checkWalletConnection}
-    >
-      <Home
-        connected={connected}
-        liveEventData={liveEventData}
-        setLiveEventData={setLiveEventData}
-        count={count}
-        setCount={setCount}
-        latestPing={latestPing}
-        setLatestPing={setLatestPing}
-      />
-    </Layout>
+    <div className={styles.container}>
+      <Head>
+        <title>Moralis Chain Ping</title>
+        <meta name="description" content="Moralis LiveQuery Demo" />
+        <link rel="icon" href="/Moralis-Icon-Dark.png" />
+      </Head>
+      <main className={styles.main}>
+        <Layout
+          data={props}
+          connected={connected}
+          checkWalletConnection={checkWalletConnection}
+        >
+          <Home
+            connected={connected}
+            liveEventData={liveEventData}
+            setLiveEventData={setLiveEventData}
+            count={count}
+            setCount={setCount}
+            latestPing={latestPing}
+            setLatestPing={setLatestPing}
+          />
+        </Layout>
+        <footer className={styles.footer}>
+          <a href="https://docs.moralis.io/" target="_blank" rel="noreferrer">
+            <span className={styles.logo}>
+              {/* <ByMoralis
+                width={300}
+                height={40}
+                variant="dark"
+                alt="Powered By Moralis Logo"
+              /> */}
+              <Image
+                src="/Moralis Logo_Dark.svg"
+                alt="Powered By Moralis Logo"
+                width={300}
+                height={40}
+              />
+            </span>
+          </a>
+        </footer>
+      </main>
+    </div>
   );
 };
 
