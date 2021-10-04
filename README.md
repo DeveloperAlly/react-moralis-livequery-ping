@@ -31,6 +31,11 @@ BSC testnet: https://testnet.binance.org/faucet-smart
 Kovan Eth: https://kovan.chain.link/ 
 
 
+### Running this app
+
+coming soon - PLEASE CLONE FROM DEVELOP BRANCH
+
+
 
 ### Handy links for chainIds:
 
