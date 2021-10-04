@@ -1,4 +1,10 @@
+## Description
+
+A simple app that uses moralis LiveQuery and Moralis Cloud Function to subscribe to events from a contract deployed to Polygon, BSC and Kovan networks in real time.
+
 Hosted Live on Vercel: https://react-moralis-livequery-ping.vercel.app/
+
+![image](https://user-images.githubusercontent.com/12529822/135797271-a074c2dd-164a-4acf-9105-6b997aa0c3ba.png)
 
 
 This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
