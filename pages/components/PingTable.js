@@ -18,6 +18,7 @@ const PingTable = ({ data, ping, transactionState, connected }) => {
         </Table.Cell>
         <Table.Cell>
           <Button
+            style={{ background: "#041836", color: "white" }}
             onClick={() => ping(network)}
             disabled={Boolean(transactionState.loading) || !connected} //OR NO WALLET
           >

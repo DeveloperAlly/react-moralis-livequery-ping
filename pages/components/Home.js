@@ -1,18 +1,18 @@
 import React, { useState, useEffect, useContext } from "react";
 import { useMoralis, useMoralisSubscription } from "react-moralis";
 import { Container, Header } from "semantic-ui-react";
-import MoralisPing from "./api/contracts/MoralisPing.json";
-import LatestPing from "./components/LatestPing";
-import PingTable from "./components/PingTable";
-import StatusMessage from "./components/StatusMessage";
-import FaucetFunds from "./components/FaucetFunds";
-import { CHAIN_DATA } from "./api/utils/chainData";
+import MoralisPing from "../api/contracts/MoralisPing.json";
+import LatestPing from "./LatestPing";
+import PingTable from "./PingTable";
+import StatusMessage from "./StatusMessage";
+import FaucetFunds from "./FaucetFunds";
+import { CHAIN_DATA } from "../api/utils/chainData";
 import {
   INITIAL_TRANSACTION_STATE,
   INITIAL_CHAIN_DATA,
-} from "./api/utils/dataMaps";
-import { ConnectedContext } from "./api/utils/connected-context";
-import { calculateTotalPings } from "./api/utils/helperFunctions";
+} from "../api/utils/dataMaps";
+import { ConnectedContext } from "../api/utils/connected-context";
+import { calculateTotalPings } from "../api/utils/helperFunctions";
 
 const Home = ({ data, ...props }) => {
   const { web3 } = useMoralis();

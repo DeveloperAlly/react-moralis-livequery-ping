@@ -4,10 +4,10 @@ import styles from "../styles/Home.module.css";
 import { useMoralis, useMoralisCloudFunction } from "react-moralis";
 import { useRouter } from "next/router";
 import Layout from "./components/Layout";
-import Home from "./Home";
-import Footer from "./components/Footer";
+import Home from "./components/Home";
 import "semantic-ui-css/semantic.min.css";
 import { ConnectedContext } from "./api/utils/connected-context";
+import Authentication from "./components/Authentication";
 
 const Index = (props) => {
   const { web3 } = useMoralis();
@@ -62,12 +62,10 @@ const Index = (props) => {
       <main className={styles.main}>
         <ConnectedContext.Provider value={connected}>
           <Layout data={props}>
+            <Authentication />
             <Home data={data} />
           </Layout>
         </ConnectedContext.Provider>
-        <footer className={styles.footer}>
-          <Footer />
-        </footer>
       </main>
     </div>
   );

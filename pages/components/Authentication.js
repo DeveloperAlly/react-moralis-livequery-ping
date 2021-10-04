@@ -1,18 +1,16 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useContext } from "react";
 import { useRouter } from "next/router";
 import { Container, Button } from "semantic-ui-react";
 import { useMoralis } from "react-moralis";
 import StatusMessage from "./StatusMessage";
+import { ConnectedContext } from "../api/utils/connected-context";
 
-const Authentication = ({
-  data,
-  checkWalletConnection,
-  connected,
-  ...props
-}) => {
+const Authentication = () => {
   const { web3, enableWeb3, isWeb3Enabled, web3EnableError } = useMoralis();
   const router = useRouter();
+  const connected = useContext(ConnectedContext);
 
+  //move button to a component
   const renderInstallMetamask = () => {
     return (
       <Button
@@ -46,6 +44,10 @@ const Authentication = ({
   const renderConnectedButton = () => {
     return (
       <Button
+        style={{
+          backgroundColor: "#B7E803 !important",
+          color: "#B7E803 !important",
+        }}
         color="green"
         basic
         size="large"
@@ -86,7 +88,6 @@ const Authentication = ({
           />
         </Container>
       )}
-      {props.children}
     </Container>
   );
 };
