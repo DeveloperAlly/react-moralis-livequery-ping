@@ -5,6 +5,12 @@ export const INITIAL_TRANSACTION_STATE = {
   warning: "",
 };
 
+export const INITIAL_CHAIN_DATA = {
+  polygon: [],
+  bsc: [],
+  kovan: [],
+};
+
 export const CHAIN_MAP = {
   80001: "Polygon Testnet",
   97: "Binance Testnet",
