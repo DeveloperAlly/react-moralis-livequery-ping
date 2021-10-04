@@ -2,21 +2,13 @@ import { useState, useEffect } from "react";
 import Image from "next/image";
 import Head from "next/head";
 import styles from "../styles/Home.module.css";
-import {
-  useMoralis,
-  useMoralisCloudFunction,
-  useMoralisSubscription,
-} from "react-moralis";
+import { useMoralis, useMoralisCloudFunction } from "react-moralis";
 import { useRouter } from "next/router";
 import Layout from "./components/Layout";
 import Home from "./Home";
+import { INITIAL_CHAIN_DATA } from "./api/utils/dataMaps";
+import Footer from "./components/Footer";
 import "semantic-ui-css/semantic.min.css";
-
-const INITIAL_CHAIN_DATA = {
-  polygon: [],
-  bsc: [],
-  kovan: [],
-};
 
 const Index = (props) => {
   const { web3 } = useMoralis();
@@ -123,22 +115,7 @@ const Index = (props) => {
           />
         </Layout>
         <footer className={styles.footer}>
-          <a href="https://docs.moralis.io/" target="_blank" rel="noreferrer">
-            <span className={styles.logo}>
-              {/* <ByMoralis
-                width={300}
-                height={40}
-                variant="dark"
-                alt="Powered By Moralis Logo"
-              /> */}
-              <Image
-                src="/Moralis Logo_Dark.svg"
-                alt="Powered By Moralis Logo"
-                width={300}
-                height={40}
-              />
-            </span>
-          </a>
+          <Footer />
         </footer>
       </main>
     </div>

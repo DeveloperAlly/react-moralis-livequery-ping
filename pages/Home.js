@@ -5,30 +5,17 @@ import {
   useMoralisSubscription,
   useMoralisCloudFunction,
 } from "react-moralis";
-import { Container, Header, Button } from "semantic-ui-react";
+import { Container, Header, Button, Image } from "semantic-ui-react";
 import MoralisPing from "./api/contracts/MoralisPing.json";
 import StatusMessage from "./components/StatusMessage";
 import PingTable from "./components/PingTable";
 import { CHAIN_DATA } from "./api/utils/chainData";
-
-const INITIAL_TRANSACTION_STATE = {
-  loading: "",
-  error: "",
-  success: "",
-  warning: "",
-};
-
-const CHAIN_MAP = {
-  80001: "Polygon Testnet",
-  97: "Binance Testnet",
-  42: "Kovan Ethereum Testnet",
-};
-
-// const INITIAL_CHAIN_DATA = {
-//   polygon: [],
-//   bsc: [],
-//   kovan: [],
-// };
+import {
+  INITIAL_TRANSACTION_STATE,
+  CHAIN_MAP,
+  FAUCET_URLS,
+} from "./api/utils/dataMaps";
+import FaucetFunds from "./components/FaucetFunds";
 
 const Home = ({
   connected,
@@ -43,6 +30,9 @@ const Home = ({
 }) => {
   const {
     web3,
+    enableWeb3,
+    isWeb3Enabled,
+    web3EnableError,
     // authenticate,
     // isAuthenticated,
     // user,
@@ -129,7 +119,7 @@ const Home = ({
 
   useEffect(() => {
     console.log("LIVE", liveEventData);
-    setCount(calculateTotalPings());
+    liveEventData && setCount(calculateTotalPings());
   }, [liveEventData, latestPing]);
 
   const callPing = async (chain) => {
@@ -223,7 +213,10 @@ const Home = ({
       });
   };
 
+  const addWallet = async (chain) => {};
+
   const ping = async (chain) => {
+    !isWeb3Enabled && enableWeb3();
     setTransactionState(INITIAL_TRANSACTION_STATE);
 
     await web3.eth
@@ -359,6 +352,7 @@ const Home = ({
           )}
         </Container>
       )}
+      <FaucetFunds />
     </div>
   );
 };

@@ -1,21 +1,16 @@
 import React, { useState, useEffect } from "react";
 import { Container } from "semantic-ui-react";
 import { useRouter } from "next/router";
-import { Transition, Header, Image as SImage, Button } from "semantic-ui-react";
+import { Button } from "semantic-ui-react";
 import { useMoralis } from "react-moralis";
 import useInterval from "../api/useInterval";
+import HeaderLogo from "./HeaderLogo";
 import StatusMessage from "./StatusMessage";
 
 //Hosts the top level layout of our app
 const Layout = ({ data, checkWalletConnection, connected, ...props }) => {
   const { web3, enableWeb3, isWeb3Enabled, web3EnableError } = useMoralis();
   const router = useRouter();
-  const [isVisibile, setIsVisible] = useState(true);
-
-  const REFRESH_INTERVAL = 10000;
-  useInterval(async () => {
-    setIsVisible(!isVisibile);
-  }, REFRESH_INTERVAL);
 
   const renderInstallMetamask = () => {
     return (
@@ -63,29 +58,22 @@ const Layout = ({ data, checkWalletConnection, connected, ...props }) => {
 
   return (
     <Container fluid style={{ paddingTop: "2em" }} key={connected}>
-      <Header as="h1" icon textAlign="center">
-        <Transition
-          animation="tada"
-          duration="1500"
-          transitionOnMount
-          visible={isVisibile}
-          onComplete={() => {
-            setIsVisible(false);
-          }}
-        >
-          <SImage src="/Moralis-Icon-Dark.png" />
-        </Transition>
-        <Header.Content style={{ paddingTop: "20px" }}>
-          Moralis Chain Ping
-        </Header.Content>
-        <div key={checkWalletConnection}>
-          {connected
-            ? renderConnectedButton()
-            : web3EnableError
-            ? renderInstallMetamask()
-            : renderConnectWallet()}
-        </div>
-      </Header>
+      <HeaderLogo />
+      <Container
+        key={checkWalletConnection}
+        style={{
+          width: "100%",
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "center",
+        }}
+      >
+        {connected
+          ? renderConnectedButton()
+          : web3EnableError
+          ? renderInstallMetamask()
+          : renderConnectWallet()}
+      </Container>
       {web3EnableError && (
         <Container style={{ marginTop: "20px", width: "30%" }}>
           <StatusMessage

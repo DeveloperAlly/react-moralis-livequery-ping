@@ -1,0 +1,27 @@
+export const INITIAL_TRANSACTION_STATE = {
+  loading: "",
+  error: "",
+  success: "",
+  warning: "",
+};
+
+export const CHAIN_MAP = {
+  80001: "Polygon Testnet",
+  97: "Binance Testnet",
+  42: "Kovan Ethereum Testnet",
+};
+
+export const FAUCET_URLS = {
+  bsc: "https://testnet.binance.org/faucet-smart",
+  polygon: "https://faucet.polygon.technology/",
+  kovan: "https://faucet.kovan.network/",
+};
+
+export const MORALIS_SOCIALS = {
+  docs: "https://docs.moralis.io/",
+  youtube: "https://www.youtube.com/channel/UCgWS9Q3P5AxCWyQLT2kQhBw",
+  discord: "",
+  forum: "",
+  github: "https://github.com/MoralisWeb3",
+  twitter: "https://twitter.com/MoralisWeb3",
+};
