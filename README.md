@@ -79,11 +79,15 @@ BSC testnet: https://testnet.bscscan.com/
 
 ## Architecture diagrams
 
+coming soon
+
 
 ## BugList / To-do List
 
 Authorisation needs updating incl. checking on account changes
+
 React code needs Context and ErrorBoundary objects & should also bring props in on initial run (server side render some props)
+
 React code could use breakdown / refactor to better components and typescript
 
 
