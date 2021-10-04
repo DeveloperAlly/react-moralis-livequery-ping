@@ -21,17 +21,7 @@ Metamask ( https://docs.metamask.io )
 Moralis.io account ( https://moralis.io/ )
 
 
-
-### Faucets for testnets (check out bnb faucet - it basically uses liveQuery!)
-
-Polygon: https://faucet.polygon.technology/
-
-BSC testnet: https://testnet.binance.org/faucet-smart 
-
-Kovan Eth: https://kovan.chain.link/ 
-
-
-### Running this app
+## Running this app
 
 coming soon - PLEASE CLONE FROM DEVELOP BRANCH
 
@@ -51,6 +41,15 @@ React code could use breakdown / refactor to better components and typescript
 
 
 ## Resources
+
+
+### Faucets for testnets (check out bnb faucet - it basically uses liveQuery!)
+
+Polygon: https://faucet.polygon.technology/
+
+BSC testnet: https://testnet.binance.org/faucet-smart 
+
+Kovan Eth: https://kovan.chain.link/ 
 
 ### Handy links for chainIds:
 
