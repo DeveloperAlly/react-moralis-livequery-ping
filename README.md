@@ -33,10 +33,8 @@ Components
 ![Architecture diagram](https://user-images.githubusercontent.com/12529822/135827608-c4b93c48-88cd-4345-ac06-61232b56c239.png)
 
 
-Authorisation
-![Authorisation](https://user-images.githubusercontent.com/12529822/136002083-2d4fb98f-c852-4020-8449-86c0c599b12f.png)
-
-
+Authorisation / Web3 Logon
+![Authorisation](https://user-images.githubusercontent.com/12529822/136002321-f383a620-ce70-4d23-afa6-39c3a5bbd8a8.png)
 
 
 
