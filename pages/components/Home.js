@@ -4,7 +4,7 @@ import {
   useMoralisSubscription,
   useMoralisCloudFunction,
 } from "react-moralis";
-import { Container, Header } from "semantic-ui-react";
+import { Container, Header, Button } from "semantic-ui-react";
 import MoralisPing from "../api/contracts/MoralisPing.json";
 import LatestPing from "./LatestPing";
 import PingTable from "./PingTable";
@@ -41,21 +41,37 @@ const Home = ({ ...props }) => {
     ),
   };
 
-  useEffect(() => {
-    fetch();
-  }, []);
-
   // this is my init cloud function
   const {
     fetch,
     data,
     error: cloudError,
     isLoading: cloudIsLoading,
-  } = useMoralisCloudFunction("InitFunction", { autoFetch: false });
+  } = useMoralisCloudFunction("FetchInitialData");
 
   useEffect(() => {
-    console.log("DATA", data);
+    console.log("data", data, cloudError, cloudIsLoading);
+    if (cloudError && !cloudIsLoading) {
+      setTransactionState({
+        ...transactionState,
+        disableTimeout: true,
+        warning: (
+          <div>
+            <p>Could not load CloudData</p>
+            {cloudError && <p>{cloudError.message}</p>}
+            <p>
+              You can still use Ping function though data displayed may not be
+              accurate
+            </p>
+            <Button basic onClick={fetch}>
+              Re-fetch
+            </Button>
+          </div>
+        ),
+      });
+    }
     if (data) {
+      setTransactionState(INITIAL_TRANSACTION_STATE);
       setLiveEventData({
         polygon: data.polygon,
         bsc: data.bsc,
@@ -66,15 +82,8 @@ const Home = ({ ...props }) => {
         return b.createdAt - a.createdAt;
       });
       setLatestPing(items[0]);
-    }
-  }, [data]);
-
-  useEffect(() => {
-    setTransactionState({
-      ...transactionState,
-      error: `Could not load CloudData. Error: ${cloudError}`,
-    });
-  }, [cloudError]);
+    } //else something happened and the data is null or undefined. We can still ping though
+  }, [data, cloudError, cloudIsLoading]);
 
   useMoralisSubscription(
     "PolygonPing",

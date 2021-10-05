@@ -1,15 +1,18 @@
 import { Moralis } from "react-moralis";
 
-Moralis.Cloud.define("InitFunction", async (request) => {
-  const queryP = new Moralis.Query("PolygonPing");
-  queryP.descending("createdAt").limit(1);
-  const queryB = new Moralis.Query("BSCPing");
-  queryB.descending("createdAt").limit(1);
-  const queryK = new Moralis.Query("KovanPing");
-  queryK.descending("createdAt").limit(1);
-  const polyData = await queryP.find();
-  const bscData = await queryB.find();
-  const kovanData = await queryK.find();
+Moralis.Cloud.define("FetchInitialData", async (request) => {
+  const polyData = await new Moralis.Query("PolygonPing")
+    .descending("createdAt")
+    .limit(1)
+    .find();
+  const bscData = await new Moralis.Query("BSCPing")
+    .descending("createdAt")
+    .limit(1)
+    .find();
+  const kovanData = await new Moralis.Query("KovanPing")
+    .descending("createdAt")
+    .limit(1)
+    .find();
 
   return { polygon: polyData, bsc: bscData, kovan: kovanData };
 });

@@ -23,7 +23,7 @@ export const AUTH_BUTTON_PROPS = {
     message: "Connect",
   },
   nowallet: {
-    color: "",
+    color: "grey",
     action: () => window.open("https://metamask.io/download.html", "_blank"),
     message: "Install Metamask! 🦊",
   },

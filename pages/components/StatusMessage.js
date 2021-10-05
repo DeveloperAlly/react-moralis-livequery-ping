@@ -4,16 +4,11 @@ import useInterval from "../api/useInterval";
 import { INITIAL_TRANSACTION_STATE } from "../api/utils/dataMaps";
 
 //** TODO: clear error and success messages after a timeout period properly - handle state */
-const StatusMessage = ({
-  status,
-  setTransactionState,
-  useTimeout,
-  ...props
-}) => {
+const StatusMessage = ({ status, setTransactionState, ...props }) => {
   const REFRESH_INTERVAL = 40000;
   useInterval(async () => {
     {
-      if (!status.loading && useTimeout) {
+      if (!status.loading && !status.disableTimeout) {
         setTransactionState(INITIAL_TRANSACTION_STATE);
       }
     }
