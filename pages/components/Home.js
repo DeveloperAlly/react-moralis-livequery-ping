@@ -9,7 +9,6 @@ import MoralisPing from "../api/contracts/MoralisPing.json";
 import LatestPing from "./LatestPing";
 import PingTable from "./PingTable";
 import StatusMessage from "./StatusMessage";
-import FaucetFunds from "./FaucetFunds";
 import { CHAIN_DATA } from "../api/utils/chainData";
 import {
   INITIAL_TRANSACTION_STATE,
@@ -17,8 +16,8 @@ import {
 } from "../api/utils/dataMaps";
 import { calculateTotalPings } from "../api/utils/helperFunctions";
 
-const Home = ({ data1, ...props }) => {
-  const { web3, isAuthenticated, isWeb3Enabled, enableWeb3 } = useMoralis();
+const Home = ({ ...props }) => {
+  const { web3, isAuthenticated, isWeb3Enabled } = useMoralis();
 
   const [transactionState, setTransactionState] = useState(
     INITIAL_TRANSACTION_STATE
@@ -47,10 +46,35 @@ const Home = ({ data1, ...props }) => {
   }, []);
 
   // this is my init cloud function
-  const { fetch, data, error, isLoading } = useMoralisCloudFunction(
-    "InitFunction",
-    { autoFetch: false }
-  );
+  const {
+    fetch,
+    data,
+    error: cloudError,
+    isLoading: cloudIsLoading,
+  } = useMoralisCloudFunction("InitFunction", { autoFetch: false });
+
+  useEffect(() => {
+    console.log("DATA", data);
+    if (data) {
+      setLiveEventData({
+        polygon: data.polygon,
+        bsc: data.bsc,
+        kovan: data.kovan,
+      });
+      let items = [data.polygon[0], data.bsc[0], data.kovan[0]];
+      items.sort(function (a, b) {
+        return b.createdAt - a.createdAt;
+      });
+      setLatestPing(items[0]);
+    }
+  }, [data]);
+
+  useEffect(() => {
+    setTransactionState({
+      ...transactionState,
+      error: `Could not load CloudData. Error: ${cloudError}`,
+    });
+  }, [cloudError]);
 
   useMoralisSubscription(
     "PolygonPing",
@@ -95,22 +119,6 @@ const Home = ({ data1, ...props }) => {
     // console.log("LIVE", liveEventData, latestPing);
     liveEventData && setCount(calculateTotalPings(liveEventData));
   }, [liveEventData]);
-
-  useEffect(() => {
-    console.log("DATA", data);
-    if (data) {
-      setLiveEventData({
-        polygon: data.polygon,
-        bsc: data.bsc,
-        kovan: data.kovan,
-      });
-      let items = [data.polygon[0], data.bsc[0], data.kovan[0]];
-      items.sort(function (a, b) {
-        return b.createdAt - a.createdAt;
-      });
-      setLatestPing(items[0]);
-    }
-  }, [data]);
 
   const changeWallet = async (chain) => {
     await web3.currentProvider
@@ -245,11 +253,12 @@ const Home = ({ data1, ...props }) => {
             <StatusMessage
               status={transactionState}
               setTransactionState={setTransactionState}
+              useTimeout={false}
             />
           )}
         </Container>
       )}
-      <FaucetFunds />
+      {props.children}
     </div>
   );
 };
