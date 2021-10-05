@@ -9,15 +9,15 @@ import Authentication from "./components/Authentication";
 
 const Index = (props) => {
   //will only run once on app loading
-  useEffect(() => {
-    fetch();
-  }, []);
+  // useEffect(() => {
+  //   fetch();
+  // }, []);
 
-  // this is my init cloud function
-  const { fetch, data, error, isLoading } = useMoralisCloudFunction(
-    "InitFunction",
-    { autoFetch: false }
-  );
+  // // this is my init cloud function
+  // const { fetch, data, error, isLoading } = useMoralisCloudFunction(
+  //   "InitFunction",
+  //   { autoFetch: false }
+  // );
 
   return (
     <div className={styles.container}>
@@ -29,7 +29,7 @@ const Index = (props) => {
       <main className={styles.main}>
         <Layout>
           <Authentication />
-          <Home data={data} />
+          <Home data1={"data"} />
         </Layout>
       </main>
     </div>

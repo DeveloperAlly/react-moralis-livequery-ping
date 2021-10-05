@@ -13,6 +13,7 @@ import { AUTH_BUTTON_PROPS } from "../api/utils/dataMaps";
 const Authentication = () => {
   const {
     Moralis,
+    isWeb3Enabled,
     enableWeb3,
     web3EnableError,
     authenticate,
@@ -37,11 +38,12 @@ const Authentication = () => {
   }, []);
 
   const AuthButton = () => {
-    let type = isAuthenticated
-      ? "authenticated"
-      : web3EnableError
-      ? "nowallet"
-      : "unauthenticated";
+    let type =
+      isAuthenticated && isWeb3Enabled
+        ? "authenticated"
+        : web3EnableError
+        ? "nowallet"
+        : "unauthenticated";
 
     //type = "authenticated", "unauthenticated", "nowallet"
     const { color, action, message } = AUTH_BUTTON_PROPS[type];

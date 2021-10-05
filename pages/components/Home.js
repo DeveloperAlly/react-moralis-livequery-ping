@@ -1,5 +1,9 @@
 import React, { useState, useEffect, useContext } from "react";
-import { useMoralis, useMoralisSubscription } from "react-moralis";
+import {
+  useMoralis,
+  useMoralisSubscription,
+  useMoralisCloudFunction,
+} from "react-moralis";
 import { Container, Header } from "semantic-ui-react";
 import MoralisPing from "../api/contracts/MoralisPing.json";
 import LatestPing from "./LatestPing";
@@ -13,8 +17,8 @@ import {
 } from "../api/utils/dataMaps";
 import { calculateTotalPings } from "../api/utils/helperFunctions";
 
-const Home = ({ data, ...props }) => {
-  const { web3, isAuthenticated } = useMoralis();
+const Home = ({ data1, ...props }) => {
+  const { web3, isAuthenticated, isWeb3Enabled, enableWeb3 } = useMoralis();
 
   const [transactionState, setTransactionState] = useState(
     INITIAL_TRANSACTION_STATE
@@ -37,6 +41,16 @@ const Home = ({ data, ...props }) => {
       process.env.NEXT_PUBLIC_KOVAN_ADDRESS
     ),
   };
+
+  useEffect(() => {
+    fetch();
+  }, []);
+
+  // this is my init cloud function
+  const { fetch, data, error, isLoading } = useMoralisCloudFunction(
+    "InitFunction",
+    { autoFetch: false }
+  );
 
   useMoralisSubscription(
     "PolygonPing",
@@ -80,7 +94,7 @@ const Home = ({ data, ...props }) => {
   useEffect(() => {
     // console.log("LIVE", liveEventData, latestPing);
     liveEventData && setCount(calculateTotalPings(liveEventData));
-  }, [liveEventData, latestPing]);
+  }, [liveEventData]);
 
   useEffect(() => {
     console.log("DATA", data);
@@ -220,7 +234,7 @@ const Home = ({ data, ...props }) => {
             data={liveEventData}
             ping={ping}
             transactionState={transactionState}
-            connected={isAuthenticated}
+            connected={isAuthenticated && isWeb3Enabled}
           />
         )}
       </Container>
