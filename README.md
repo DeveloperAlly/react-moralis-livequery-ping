@@ -26,24 +26,20 @@ Moralis.io account ( https://moralis.io/ )
 coming soon - PLEASE CLONE FROM DEVELOP BRANCH
 
 
-## Architecture diagram
+## Architecture diagrams
 
 
 
 ![Architecture diagram](https://user-images.githubusercontent.com/12529822/135827608-c4b93c48-88cd-4345-ac06-61232b56c239.png)
 
 
+![Authorisation](https://user-images.githubusercontent.com/12529822/135966224-806f9aec-e68f-44b9-8a42-4a3891962f48.png)
+
 
 
 ## BugList / To-do List (Yes - this app is breakable  - I welcome PR's :P)
 
-
-Authorisation needs updating incl. checking on account changes
-
-React code needs Context and ErrorBoundary objects & should also bring props in on initial run (server side render some props)
-
-React code could use breakdown / refactor to better components and typescript
-
+Probably some around here... but is it a bug or an undocumented feature??? Just kidding - submit an issue :P
 
 
 ## Resources
