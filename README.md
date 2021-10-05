@@ -29,11 +29,14 @@ coming soon - PLEASE CLONE FROM DEVELOP BRANCH
 ## Architecture diagrams
 
 
-
+Components
 ![Architecture diagram](https://user-images.githubusercontent.com/12529822/135827608-c4b93c48-88cd-4345-ac06-61232b56c239.png)
 
 
-![Authorisation](https://user-images.githubusercontent.com/12529822/135966224-806f9aec-e68f-44b9-8a42-4a3891962f48.png)
+Authorisation
+![Authorisation](https://user-images.githubusercontent.com/12529822/136002083-2d4fb98f-c852-4020-8449-86c0c599b12f.png)
+
+
 
 
 
