@@ -30,7 +30,7 @@ coming soon - PLEASE CLONE FROM DEVELOP BRANCH
 
 
 Components
-![Architecture diagram](https://user-images.githubusercontent.com/12529822/135827608-c4b93c48-88cd-4345-ac06-61232b56c239.png)
+![Architecture diagram](https://user-images.githubusercontent.com/12529822/136002786-6bdf39d4-07f6-48e4-aff8-2d73517fea5b.png)
 
 
 Authorisation / Web3 Logon
