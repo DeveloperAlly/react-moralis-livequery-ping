@@ -1,6 +1,6 @@
 ## Description
 
-A simple app that uses moralis LiveQuery and Moralis Cloud Function to subscribe to events from a contract deployed to Polygon, BSC and Kovan networks in real time.
+This DApp uses moralis server, DB and functions (LiveQuery and Cloud Function) to subscribe to onchain events from a contract deployed to Polygon, BSC and Kovan networks in real time. When a user pings the front end, the DApp will increment the count and show the latest ping information.
 
 Hosted Live on Vercel: https://react-moralis-livequery-ping.vercel.app/
 
@@ -14,16 +14,37 @@ This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next
 
 ### Requirements:
 
-Node ( https://nodejs.org/ )
+[Node js](https://nodejs.org/en/). 
 
-Metamask ( https://docs.metamask.io )
+[Moralis Account](https://moralis.io/)
 
-Moralis.io account ( https://moralis.io/ )
+[Metamask Wallet](https://metamask.io/) => NB: USE A FRESH WALLET WITH NO REAL VALUABLE ASSETS ON IT (test only) AND KEEP YOUR SEED PHRASE HANDY (we need this to deploy the solidity contracts). 
+
+Technically not a dependency - you can use remix to make and deploy your contracts
+[Truffle](https://www.trufflesuite.com/truffle) => install using npm command. 
+[Remix](http://remix.ethereum.org/) => browser based contract development & deployment
+
+> npm install -g truffle
 
 
-## Running this app
+**Contracts**: [Truffle](https://www.trufflesuite.com/truffle), Solidity, [Moralis](https://moralis.io/), [Metamask](https://docs.metamask.io/guide/)
 
-coming soon - PLEASE CLONE FROM DEVELOP BRANCH
+**Front-end**: React, [Next](https://nextjs.org/) (routing, SSR)
+
+**Other npm libs**: @react-moralis, @truffle/hdwallet-provider, dotenv, semantic-ui-react 
+
+
+
+## **Running the App**
+
+1. Clone the repo `git clone https://github.com/DeveloperAlly/react-moralis-livequery-ping.git`
+2. Install dependencies `npm install`
+3. Create a Moralis server [howto](https://docs.moralis.io/moralis-server/getting-started/quick-start)
+4. Deploy the contracts either through remix or using truffle `truffle migrate --network kovan`, `truffle migrate --network bsc`, `truffle migrate --network polygon`
+5. Create a .env file `> touch .env`
+7. Add the moralis details & the smart contract deployed addresses to the .env file (as per the .env.example file)
+11. Run the front end from your terminal locally >`npm run dev`
+12. Navigate to [http://localhost:3000](http://localhost:3000/) to see the app in action!
 
 
 ## Architecture diagrams
@@ -38,12 +59,21 @@ Authorisation / Web3 Logon
 
 
 
-## BugList / To-do List (Yes - this app is breakable  - I welcome PR's :P)
+## BugList / To-do List 
 
-Probably some around here... but is it a bug or an undocumented feature??? Just kidding - submit an issue :P
+Probably some around here... but is it a bug or an undocumented feature??? Just kidding - submit an issue or PR :P
 
 
 ## Resources
+
+Moralis: https://moralis.io
+
+React-moralis: https://github.com/MoralisWeb3/react-moralis
+
+Moralis YouTube: https://www.youtube.com/channel/UCgWS9Q3P5AxCWyQLT2kQhBw
+
+Moralis Forum: https://forum.moralis.io/
+
 
 
 ### Faucets for testnets 
