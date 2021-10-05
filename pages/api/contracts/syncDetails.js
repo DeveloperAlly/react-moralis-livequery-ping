@@ -1,5 +1,5 @@
 const topic = "ChainPinged(address, uint256, uint256)";
-import { ABI } from "./syncABI.json";
+// import { ABI } from "./syncABI.json";
 
 const syncEvents = {
   bsc: {
