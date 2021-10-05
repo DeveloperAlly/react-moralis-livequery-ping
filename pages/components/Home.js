@@ -11,12 +11,10 @@ import {
   INITIAL_TRANSACTION_STATE,
   INITIAL_CHAIN_DATA,
 } from "../api/utils/dataMaps";
-import { ConnectedContext } from "../api/utils/connected-context";
 import { calculateTotalPings } from "../api/utils/helperFunctions";
 
 const Home = ({ data, ...props }) => {
-  const { web3 } = useMoralis();
-  const connected = useContext(ConnectedContext);
+  const { web3, isAuthenticated } = useMoralis();
 
   const [transactionState, setTransactionState] = useState(
     INITIAL_TRANSACTION_STATE
@@ -85,7 +83,7 @@ const Home = ({ data, ...props }) => {
   }, [liveEventData, latestPing]);
 
   useEffect(() => {
-    console.log("DATA once only?", data);
+    console.log("DATA", data);
     if (data) {
       setLiveEventData({
         polygon: data.polygon,
@@ -101,10 +99,6 @@ const Home = ({ data, ...props }) => {
   }, [data]);
 
   const changeWallet = async (chain) => {
-    // setTransactionState({
-    //   ...INITIAL_TRANSACTION_STATE,
-    //   message: `Changing Wallet Chains`,
-    // });
     await web3.currentProvider
       .request({
         method: "wallet_switchEthereumChain",
@@ -219,14 +213,14 @@ const Home = ({ data, ...props }) => {
       }}
     >
       <Container>
-        <Header as="h2">Total Pings: {count ? count : "loading..."}</Header>
+        <Header as="h2">Total Pings: {count ? count : 0}</Header>
         {latestPing && <LatestPing latestPing={latestPing} />}
         {liveEventData && (
           <PingTable
             data={liveEventData}
             ping={ping}
             transactionState={transactionState}
-            connected={connected}
+            connected={isAuthenticated}
           />
         )}
       </Container>
@@ -234,7 +228,10 @@ const Home = ({ data, ...props }) => {
         <Container style={{ marginTop: "20px" }}>
           {JSON.stringify(transactionState) !==
             JSON.stringify(INITIAL_TRANSACTION_STATE) && (
-            <StatusMessage status={transactionState} />
+            <StatusMessage
+              status={transactionState}
+              setTransactionState={setTransactionState}
+            />
           )}
         </Container>
       )}

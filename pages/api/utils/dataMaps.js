@@ -11,6 +11,24 @@ export const INITIAL_CHAIN_DATA = {
   kovan: [],
 };
 
+export const AUTH_BUTTON_PROPS = {
+  authenticated: {
+    color: "green",
+    action: null,
+    message: "Connected",
+  },
+  unauthenticated: {
+    color: "red",
+    action: null,
+    message: "Connect",
+  },
+  nowallet: {
+    color: "",
+    action: () => window.open("https://metamask.io/download.html", "_blank"),
+    message: "Install Metamask! 🦊",
+  },
+};
+
 export const CHAIN_MAP = {
   80001: "Polygon Testnet",
   97: "Binance Testnet",

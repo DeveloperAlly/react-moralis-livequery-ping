@@ -1,46 +1,13 @@
 import { useState, useEffect } from "react";
 import Head from "next/head";
 import styles from "../styles/Home.module.css";
-import { useMoralis, useMoralisCloudFunction } from "react-moralis";
-import { useRouter } from "next/router";
+import { useMoralisCloudFunction } from "react-moralis";
 import Layout from "./components/Layout";
 import Home from "./components/Home";
 import "semantic-ui-css/semantic.min.css";
-import { ConnectedContext } from "./api/utils/connected-context";
 import Authentication from "./components/Authentication";
 
 const Index = (props) => {
-  const { web3 } = useMoralis();
-  const router = useRouter();
-  const [connected, setConnected] = useState(null);
-
-  const checkWalletConnection = async () => {
-    let connectedState;
-    // Check if User is already connected by retrieving the accounts
-    await web3.eth
-      .getAccounts()
-      .then(async (addr) => {
-        // Set User account into state
-        connectedState = Boolean(addr.length > 0);
-        // console.log("connected state", connectedState, connected);
-        if (connectedState !== connected) {
-          router.replace("/");
-        }
-        setConnected(connectedState);
-      })
-      .catch((err) => {
-        // console.log("connected check error");
-        if (connected !== false) {
-          router.replace("/");
-        }
-        setConnected(false);
-      });
-  };
-
-  useEffect(() => {
-    checkWalletConnection();
-  });
-
   //will only run once on app loading
   useEffect(() => {
     fetch();
@@ -60,12 +27,10 @@ const Index = (props) => {
         <link rel="icon" href="/Moralis-Icon-Dark.png" />
       </Head>
       <main className={styles.main}>
-        <ConnectedContext.Provider value={connected}>
-          <Layout data={props}>
-            <Authentication />
-            <Home data={data} />
-          </Layout>
-        </ConnectedContext.Provider>
+        <Layout>
+          <Authentication />
+          <Home data={data} />
+        </Layout>
       </main>
     </div>
   );

@@ -3,59 +3,52 @@ import { useRouter } from "next/router";
 import { Container, Button } from "semantic-ui-react";
 import { useMoralis } from "react-moralis";
 import StatusMessage from "./StatusMessage";
-import { ConnectedContext } from "../api/utils/connected-context";
+import { AUTH_BUTTON_PROPS } from "../api/utils/dataMaps";
 
-//TODO: FIX & watch for events https://docs.moralis.io/moralis-server/web3/web3#events
+/**
+ * You probably want to add session and encryption for users with multiple accounts
+ * Currently - I handle account changes by logging the user out instead (quick fix)
+ */
+
 const Authentication = () => {
-  const { web3, enableWeb3, isWeb3Enabled, web3EnableError } = useMoralis();
+  const {
+    Moralis,
+    enableWeb3,
+    web3EnableError,
+    authenticate,
+    isAuthenticated,
+    user,
+    logout,
+  } = useMoralis();
   const router = useRouter();
-  const connected = useContext(ConnectedContext);
-
-  //move button to a component
-  const renderInstallMetamask = () => {
-    return (
-      <Button
-        as="a"
-        href="https://metamask.io/download.html"
-        target="_blank"
-        rel="noreferrer"
-        basic
-        size="large"
-        key={connected}
-      >
-        Install Metamask! 🦊
-      </Button>
-    );
+  AUTH_BUTTON_PROPS.unauthenticated.action = () => {
+    authenticate();
+    enableWeb3();
+  };
+  AUTH_BUTTON_PROPS.authenticated.action = () => {
+    logout();
   };
 
-  const renderConnectWallet = () => {
-    return (
-      <Button
-        key={connected}
-        color="red"
-        basic
-        size="large"
-        onClick={() => enableWeb3()}
-      >
-        Connect
-      </Button>
-    );
-  };
+  useEffect(() => {
+    Moralis.Web3.onAccountsChanged(() => {
+      logout();
+      router.replace("/");
+    });
+  }, []);
 
-  const renderConnectedButton = () => {
+  const AuthButton = () => {
+    let type = isAuthenticated
+      ? "authenticated"
+      : web3EnableError
+      ? "nowallet"
+      : "unauthenticated";
+
+    //type = "authenticated", "unauthenticated", "nowallet"
+    const { color, action, message } = AUTH_BUTTON_PROPS[type];
+
     return (
-      <Button
-        style={{
-          backgroundColor: "#B7E803 !important",
-          color: "#B7E803 !important",
-        }}
-        color="green"
-        basic
-        size="large"
-        onClick={() => router.replace("/")}
-        key={connected}
-      >
-        Connected
+      <Button color={color} basic size="large" onClick={action}>
+        {message}
       </Button>
     );
   };
@@ -63,7 +56,6 @@ const Authentication = () => {
   return (
     <Container>
       <Container
-        key={connected}
         style={{
           width: "100%",
           display: "flex",
@@ -71,11 +63,7 @@ const Authentication = () => {
           justifyContent: "center",
         }}
       >
-        {connected
-          ? renderConnectedButton()
-          : web3EnableError
-          ? renderInstallMetamask()
-          : renderConnectWallet()}
+        {<AuthButton />}
       </Container>
       {web3EnableError && (
         <Container style={{ marginTop: "20px", width: "30%" }}>

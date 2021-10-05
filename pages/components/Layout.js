@@ -4,7 +4,7 @@ import HeaderLogo from "./HeaderLogo";
 import Footer from "./Footer";
 
 //Hosts the top level layout of our app
-const Layout = ({ data, ...props }) => {
+const Layout = (props) => {
   return (
     <Container fluid style={{ paddingTop: "2em" }}>
       <HeaderLogo />

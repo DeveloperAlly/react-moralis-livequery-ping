@@ -1,7 +1,15 @@
 import React, { useEffect } from "react";
 import { Message, Icon } from "semantic-ui-react";
+import useInterval from "../api/useInterval";
+import { INITIAL_TRANSACTION_STATE } from "../api/utils/dataMaps";
 
-const StatusMessage = ({ status, ...props }) => {
+const StatusMessage = ({ status, setTransactionState, ...props }) => {
+  const REFRESH_INTERVAL = 20000;
+
+  useInterval(async () => {
+    setTransactionState(INITIAL_TRANSACTION_STATE);
+  }, REFRESH_INTERVAL);
+
   return (
     <>
       {status ? (

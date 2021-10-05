@@ -7,14 +7,12 @@ const PingTable = ({ data, ping, transactionState, connected }) => {
     return (
       <Table.Row key={network}>
         <Table.Cell>{CHAIN_DATA[network].chainName}</Table.Cell>
-        <Table.Cell>
-          {details[0] ? details[0].attributes.sender : "-"}
-        </Table.Cell>
+        <Table.Cell>{details[0] ? details[0].get("sender") : "-"}</Table.Cell>
         <Table.Cell>
           {details[0] ? details[0].createdAt.toLocaleString() : "-"}
         </Table.Cell>
         <Table.Cell>
-          {details[0] ? details[0].attributes.current_count : 0}
+          {details[0] ? details[0].get("current_count") : 0}
         </Table.Cell>
         <Table.Cell>
           <Button
