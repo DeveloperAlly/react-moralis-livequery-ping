@@ -18,7 +18,7 @@ This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next
 
 [Moralis Account](https://moralis.io/)
 
-[Metamask Wallet](https://metamask.io/) => NB: USE A FRESH WALLET WITH NO REAL VALUABLE ASSETS ON IT (test only) AND KEEP YOUR SEED PHRASE HANDY (we need this to deploy the solidity contracts). 
+[Metamask Wallet](https://metamask.io/) => NB: USE A FRESH WALLET WITH NO REAL VALUABLE ASSETS ON IT (test only). 
 
 Technically not a dependency - you can use remix to make and deploy your contracts
 [Truffle](https://www.trufflesuite.com/truffle) => install using npm command. 
