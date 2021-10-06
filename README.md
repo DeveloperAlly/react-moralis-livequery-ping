@@ -39,7 +39,7 @@ Technically not a dependency - you can use remix to make and deploy your contrac
 
 1. Clone the repo `git clone https://github.com/DeveloperAlly/react-moralis-livequery-ping.git`
 2. Install dependencies `npm install`
-3. Create a Moralis server [howto](https://docs.moralis.io/moralis-server/getting-started/quick-start)
+3. Create a Moralis server [see here for more help](https://docs.moralis.io/moralis-server/getting-started/quick-start)
 4. Deploy the contracts either through remix or using truffle `truffle migrate --network kovan`, `truffle migrate --network bsc`, `truffle migrate --network polygon`
 5. Create a .env file `> touch .env`
 7. Add the moralis details & the smart contract deployed addresses to the .env file (as per the .env.example file)
