@@ -43,9 +43,17 @@ Technically not a dependency - you can use remix to make and deploy your contrac
 4. (OPTIONAL) Deploy the contracts either through remix or using truffle `truffle migrate --network kovan`, `truffle migrate --network bsc`, `truffle migrate --network polygon`. OR use the contract addresses found in .env.example to try this out
 6. Create a .env file `> touch .env`
 7. Add the moralis details & the smart contract deployed addresses to the .env file (as per the .env.example file)
-8. Create a moralis sync event on your server with details 
-11. Run the front end from your terminal locally >`npm run dev`
-12. Navigate to [http://localhost:3000](http://localhost:3000/) to see the app in action!
+8. Create a moralis sync event on your server with details needed (example shown below - abi can be found in `/pages/api/contracts/syncABI.json`)
+9. Create a moralis Cloud Function (code can be found in `/pages/api/cloudFunctions/FetchInitialData.js`)
+10. Run the front end from your terminal locally >`npm run dev`
+11. Navigate to [http://localhost:3000](http://localhost:3000/) to see the app in action!
+
+Step 8:
+![syncEventExample](https://user-images.githubusercontent.com/12529822/136136502-73bd055e-2159-403d-88eb-bf151d71cbde.png)
+![image](https://user-images.githubusercontent.com/12529822/136136615-9b02301e-5ff4-4a02-a014-cfb8ae07a5d1.png)
+
+Step 9:
+![image](https://user-images.githubusercontent.com/12529822/136136661-6b9ac54e-4b31-44fc-8479-5d10672abffe.png)
 
 
 ## Architecture diagrams
