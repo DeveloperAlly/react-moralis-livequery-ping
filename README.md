@@ -1,6 +1,6 @@
 ## Description
 
-This DApp uses moralis server, DB and functions (LiveQuery and Cloud Function) to subscribe to onchain events from a contract deployed to Polygon, BSC and Kovan networks in real time. When a user pings the front end, the DApp will increment the count and show the latest ping information.
+This DApp uses moralis server, DB and functions (LiveQuery and Cloud Function) to subscribe to onchain events from a contract deployed to Polygon, BSC and Kovan networks in real time. When a user pings the front end, the react DApp will increment the count and show the latest ping information.
 
 Hosted Live on Vercel: https://react-moralis-livequery-ping.vercel.app/
 
