@@ -18,21 +18,3 @@ Moralis.Cloud.define("FetchInitialData", async (request) => {
 
   return { polygon: polyData, bsc: bscData, kovan: kovanData };
 });
-
-Moralis.Cloud.define("FetchInitialData", async (request) => {
-  const polyDataQ = await new Moralis.Query("PolygonPing")
-    .descending("createdAt")
-    .limit(1);
-  const bscDataQ = await new Moralis.Query("BSCPing")
-    .descending("createdAt")
-    .limit(1);
-  const kovanDataQ = await new Moralis.Query("KovanPing")
-    .descending("createdAt")
-    .limit(1);
-
-  const polyData = await polyDataQ.find();
-  const bscData = await bscDataQ.find();
-  const kovanData = await kovanDataQ.find();
-
-  return { polygon: polyData, bsc: bscData, kovan: kovanData };
-});

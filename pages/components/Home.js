@@ -1,14 +1,17 @@
-import React, { useState, useEffect, useContext } from "react";
-import {
-  useMoralis,
-  useMoralisSubscription,
-  useMoralisCloudFunction,
-} from "react-moralis";
+import React, { useState, useEffect } from "react";
+
+/**Styling */
 import { Container, Header, Button } from "semantic-ui-react";
+
+/** The Contract Interface */
 import MoralisPing from "../api/contracts/MoralisPing.json";
+
+/** React Display Components */
 import LatestPing from "./LatestPing";
 import PingTable from "./PingTable";
 import StatusMessage from "./StatusMessage";
+
+/** Utility functions & data maps */
 import { CHAIN_DATA } from "../api/utils/chainData";
 import {
   INITIAL_TRANSACTION_STATE,
@@ -16,32 +19,85 @@ import {
 } from "../api/utils/dataMaps";
 import { calculateTotalPings } from "../api/utils/helperFunctions";
 
+/**Moralis imports */
+import {
+  useMoralis,
+  useMoralisSubscription,
+  useMoralisCloudFunction,
+} from "react-moralis";
+
 const Home = ({ ...props }) => {
   const { web3, isAuthenticated, isWeb3Enabled } = useMoralis();
 
   const [transactionState, setTransactionState] = useState(
     INITIAL_TRANSACTION_STATE
   );
+
   const [count, setCount] = useState(null);
   const [latestPing, setLatestPing] = useState(null);
   const [liveEventData, setLiveEventData] = useState(INITIAL_CHAIN_DATA);
 
-  const MoralisPingContractInterface = {
-    polygon: new web3.eth.Contract(
-      MoralisPing.abi,
-      process.env.NEXT_PUBLIC_POLYGON_ADDRESS
-    ),
-    bsc: new web3.eth.Contract(
-      MoralisPing.abi,
-      process.env.NEXT_PUBLIC_BSC_ADDRESS
-    ),
-    kovan: new web3.eth.Contract(
-      MoralisPing.abi,
-      process.env.NEXT_PUBLIC_KOVAN_ADDRESS
-    ),
-  };
+  /**
+   * Subscribe to Polygon events (pings) with Moralis
+   */
+  useMoralisSubscription(
+    "PolygonPing",
+    (query) => query.descending("createdAt").limit(1),
+    [],
+    {
+      live: true,
+      onCreate: (data) => {
+        setLiveEventData({ ...liveEventData, polygon: [data] });
+        setLatestPing(data);
+      },
+    }
+  );
 
-  // this is my init cloud function
+  /**
+   * Subscribe to BSC events (pings) with Moralis
+   */
+  useMoralisSubscription(
+    "BSCPing",
+    (query) => query.descending("createdAt").limit(1),
+    [],
+    {
+      live: true,
+      onCreate: (data) => {
+        setLiveEventData({ ...liveEventData, bsc: [data] });
+        setLatestPing(data);
+      },
+    }
+  );
+
+  /**
+   * Subscribe to Kovan events (pings) with Moralis
+   */
+  useMoralisSubscription(
+    "KovanPing",
+    (query) => query.descending("createdAt").limit(1),
+    [],
+    {
+      live: true,
+      onCreate: (data) => {
+        setLiveEventData({ ...liveEventData, kovan: [data] });
+        setLatestPing(data);
+      },
+    }
+  );
+
+  /**
+   * Effect Hook to calculate totalPings when liveEventData changes
+   * LiveEventData will change when a new event is heard on the chain
+   */
+  useEffect(() => {
+    liveEventData && setCount(calculateTotalPings(liveEventData));
+  }, [liveEventData]);
+
+  /** Moralis Cloud function
+   * this will run on page load only to fetch the ping data
+   * from our moralis event data classes on all 3 chains
+   * I'm using this to avoid writing a query and calling it 3 times on loading
+   */
   const {
     fetch,
     data,
@@ -49,8 +105,10 @@ const Home = ({ ...props }) => {
     isLoading: cloudIsLoading,
   } = useMoralisCloudFunction("FetchInitialData");
 
+  /**
+   * Store our data into state when it loads, or display an error
+   */
   useEffect(() => {
-    console.log("data", data, cloudError, cloudIsLoading);
     if (cloudError && !cloudIsLoading) {
       setTransactionState({
         ...transactionState,
@@ -85,71 +143,25 @@ const Home = ({ ...props }) => {
     } //else something happened and the data is null or undefined. We can still ping though
   }, [data, cloudError, cloudIsLoading]);
 
-  useMoralisSubscription(
-    "PolygonPing",
-    (query) => query.descending("createdAt").limit(1),
-    [],
-    {
-      live: true,
-      onCreate: (data) => {
-        setLiveEventData({ ...liveEventData, polygon: [data] });
-        setLatestPing(data);
-      },
-    }
-  );
-
-  useMoralisSubscription(
-    "BSCPing",
-    (query) => query.descending("createdAt").limit(1),
-    [],
-    {
-      live: true,
-      onCreate: (data) => {
-        setLiveEventData({ ...liveEventData, bsc: [data] });
-        setLatestPing(data);
-      },
-    }
-  );
-
-  useMoralisSubscription(
-    "KovanPing",
-    (query) => query.descending("createdAt").limit(1),
-    [],
-    {
-      live: true,
-      onCreate: (data) => {
-        setLiveEventData({ ...liveEventData, kovan: [data] });
-        setLatestPing(data);
-      },
-    }
-  );
-
-  useEffect(() => {
-    // console.log("LIVE", liveEventData, latestPing);
-    liveEventData && setCount(calculateTotalPings(liveEventData));
-  }, [liveEventData]);
-
-  const changeWallet = async (chain) => {
-    await web3.currentProvider
-      .request({
-        method: "wallet_switchEthereumChain",
-        params: [
-          { chainId: `0x${parseInt(CHAIN_DATA[chain].chainID).toString(16)}` },
-        ],
-      })
-      .then((res) => {
-        callPing(chain);
-      })
-      .catch((err) => {
-        setTransactionState({
-          ...INITIAL_TRANSACTION_STATE,
-          error: `Error: ${err.message || "Could not change Wallet Chain"}`,
-        });
-      });
+  /**
+   * Connection to our Polygon, BSC and Kovan Deployed Smart Contacts
+   */
+  const MoralisPingContractInterface = {
+    polygon: new web3.eth.Contract(
+      MoralisPing.abi,
+      process.env.NEXT_PUBLIC_POLYGON_ADDRESS
+    ),
+    bsc: new web3.eth.Contract(
+      MoralisPing.abi,
+      process.env.NEXT_PUBLIC_BSC_ADDRESS
+    ),
+    kovan: new web3.eth.Contract(
+      MoralisPing.abi,
+      process.env.NEXT_PUBLIC_KOVAN_ADDRESS
+    ),
   };
 
-  const addWallet = async (chain) => {};
-
+  //Function that checks if we are on the right chain
   const ping = async (chain) => {
     setTransactionState(INITIAL_TRANSACTION_STATE);
     await web3.eth
@@ -170,6 +182,7 @@ const Home = ({ ...props }) => {
       });
   };
 
+  //Function that calls our smart contract ping function.
   const callPing = async (chain) => {
     let contractInterface;
     let { chainName, blockScanLink, chainID } = CHAIN_DATA[chain];
@@ -232,6 +245,29 @@ const Home = ({ ...props }) => {
         });
       });
   };
+
+  //Helper function to change wallet chains
+  const changeWallet = async (chain) => {
+    await web3.currentProvider
+      .request({
+        method: "wallet_switchEthereumChain",
+        params: [
+          { chainId: `0x${parseInt(CHAIN_DATA[chain].chainID).toString(16)}` },
+        ],
+      })
+      .then((res) => {
+        callPing(chain);
+      })
+      .catch((err) => {
+        setTransactionState({
+          ...INITIAL_TRANSACTION_STATE,
+          error: `Error: ${err.message || "Could not change Wallet Chain"}`,
+        });
+      });
+  };
+
+  //unimplemented helper function to add a chain if wallet doesn't have it
+  const addWallet = async (chain) => {};
 
   return (
     <div
