@@ -50,11 +50,11 @@ Technically not a dependency - you can use remix to make and deploy your contrac
 10. Run the front end from your terminal locally >`npm run dev`
 11. Navigate to [http://localhost:3000](http://localhost:3000/) to see the app in action!
 
-Step 8:
+Step 8: Find the code in `/pages/api/contracts/syncABI.json`
 ![syncEventExample](https://user-images.githubusercontent.com/12529822/136136502-73bd055e-2159-403d-88eb-bf151d71cbde.png)
 ![image](https://user-images.githubusercontent.com/12529822/136136615-9b02301e-5ff4-4a02-a014-cfb8ae07a5d1.png)
 
-Step 9:
+Step 9: Find the code in `/pages/api/cloudFunctions/FetchInitialData.js`
 ![image](https://user-images.githubusercontent.com/12529822/136136661-6b9ac54e-4b31-44fc-8479-5d10672abffe.png)
 
 
