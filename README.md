@@ -4,6 +4,8 @@ This DApp uses moralis server, DB and functions (LiveQuery and Cloud Function) t
 
 Hosted Live on Vercel: https://react-moralis-livequery-ping.vercel.app/
 
+Watch the Video Demo: https://www.youtube.com/watch?v=5Gp4XPR-YW8
+
 ![image](https://user-images.githubusercontent.com/12529822/135797271-a074c2dd-164a-4acf-9105-6b997aa0c3ba.png)
 
 
