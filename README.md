@@ -1,6 +1,147 @@
+## Description
+
+This DApp uses moralis server, DB and functions (LiveQuery and Cloud Function) to subscribe to onchain events from a contract deployed to Polygon, BSC and Kovan networks in real time. When a user pings the front end, the react DApp will increment the count and show the latest ping information.
+
+Hosted Live on Vercel: https://react-moralis-livequery-ping.vercel.app/
+
+Watch the Video Demo: https://www.youtube.com/watch?v=5Gp4XPR-YW8
+
+![image](https://user-images.githubusercontent.com/12529822/135797271-a074c2dd-164a-4acf-9105-6b997aa0c3ba.png)
+
+
 This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
 
-## Getting Started
+
+## Framework
+
+### Requirements:
+
+[Node js](https://nodejs.org/en/). 
+
+[Moralis Account](https://moralis.io/)
+
+[Metamask Wallet](https://metamask.io/) => NB: USE A FRESH WALLET WITH NO REAL VALUABLE ASSETS ON IT (test only). 
+
+Technically not a dependency - you can use remix to make and deploy your contracts
+[Truffle](https://www.trufflesuite.com/truffle) => install using npm command. 
+[Remix](http://remix.ethereum.org/) => browser based contract development & deployment
+
+> npm install -g truffle
+
+
+**Contracts**: [Truffle](https://www.trufflesuite.com/truffle), Solidity, [Moralis](https://moralis.io/), [Metamask](https://docs.metamask.io/guide/)
+
+**Front-end**: React, [Next](https://nextjs.org/) (routing, SSR)
+
+**Other npm libs**: @react-moralis, @truffle/hdwallet-provider, dotenv, semantic-ui-react 
+
+
+
+## **Running the App**
+
+1. Clone the repo `git clone https://github.com/DeveloperAlly/react-moralis-livequery-ping.git`
+2. Install dependencies `npm install`
+3. Create a Moralis server [see here for more help](https://docs.moralis.io/moralis-server/getting-started/quick-start)
+4. (OPTIONAL) Deploy the contracts either through remix or using truffle `truffle migrate --network kovan`, `truffle migrate --network bsc`, `truffle migrate --network polygon`. OR use the contract addresses found in .env.example to try this out
+6. Create a .env file `> touch .env`
+7. Add the moralis details & the smart contract deployed addresses to the .env file (as per the .env.example file)
+8. Create a moralis sync event on your server with details needed (example shown below - abi can be found in `/pages/api/contracts/syncABI.json`)
+9. Create a moralis Cloud Function (code can be found in `/pages/api/cloudFunctions/FetchInitialData.js`)
+10. Run the front end from your terminal locally >`npm run dev`
+11. Navigate to [http://localhost:3000](http://localhost:3000/) to see the app in action!
+
+Step 8: Find the code in `/pages/api/contracts/syncABI.json`
+![syncEventExample](https://user-images.githubusercontent.com/12529822/136136502-73bd055e-2159-403d-88eb-bf151d71cbde.png)
+![image](https://user-images.githubusercontent.com/12529822/136136615-9b02301e-5ff4-4a02-a014-cfb8ae07a5d1.png)
+
+Step 9: Find the code in `/pages/api/cloudFunctions/FetchInitialData.js`
+![image](https://user-images.githubusercontent.com/12529822/136136661-6b9ac54e-4b31-44fc-8479-5d10672abffe.png)
+
+
+## Architecture diagrams
+
+
+Components
+![Architecture diagram](https://user-images.githubusercontent.com/12529822/136002786-6bdf39d4-07f6-48e4-aff8-2d73517fea5b.png)
+
+
+Authorisation / Web3 Logon
+![Authorisation](https://user-images.githubusercontent.com/12529822/136002321-f383a620-ce70-4d23-afa6-39c3a5bbd8a8.png)
+
+
+
+## BugList / To-do List 
+
+Probably some around here... but is it a bug or an undocumented feature??? Just kidding - submit an issue or PR :P
+
+
+## Resources
+
+Moralis: https://moralis.io
+
+React-moralis: https://github.com/MoralisWeb3/react-moralis
+
+Moralis YouTube: https://www.youtube.com/channel/UCgWS9Q3P5AxCWyQLT2kQhBw
+
+Moralis Forum: https://forum.moralis.io/
+
+
+
+### Faucets for testnets 
+
+Polygon: https://faucet.polygon.technology/
+
+BSC testnet: https://testnet.binance.org/faucet-smart (check out bnb faucet - it basically uses liveQuery to show most recent addresses that have requested funds!)
+
+Kovan Eth: https://kovan.chain.link/ 
+
+### Handy links for chainIds:
+
+https://chainlist.org/ 
+
+### Docs for used framework
+Moralis
+Docs: https://docs.moralis.io/ 
+Discord: 
+Forum: https://forum.moralis.io/ 
+Moralis npm: https://www.npmjs.com/package/moralis 
+React-moralis: https://www.npmjs.com/package/react-moralis & https://github.com/MoralisWeb3/react-moralis & https://docs.moralis.io/moralis-server/tools/react-moralis 
+YouTube: https://www.youtube.com/channel/UCgWS9Q3P5AxCWyQLT2kQhBw 
+
+Solidity lang
+https://docs.soliditylang.org/ 
+
+Nextjs (not needed - have not really used the features that make next cool so you could just use a react app)
+https://nextjs.org/docs
+
+React
+https://reactjs.org/docs 
+
+Truffle
+https://www.trufflesuite.com/ 
+React Semantic-ui (I prefer material-ui though)
+https://react.semantic-ui.com/ 
+
+React-moralis
+
+Metamask
+https://docs.metamask.io/ 
+
+Remix (for testing contracts initially)
+http://remix.ethereum.org/
+
+
+### Block explorer links
+
+Mumbai polygon: https://mumbai.polygonscan.com/ 
+
+Kovan eth: https://kovan.etherscan.io/ 
+
+BSC testnet: https://testnet.bscscan.com/ 
+
+
+
+## Nextjs DOCS - Getting Started
 
 First, run the development server:
 

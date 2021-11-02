@@ -1,29 +1,22 @@
 import React from "react";
 import { Table, Button } from "semantic-ui-react";
-import { useMoralis } from "react-moralis";
 import { CHAIN_DATA } from "../api/utils/chainData";
 
 const PingTable = ({ data, ping, transactionState, connected }) => {
-  const { web3, isWeb3Enabled } = useMoralis();
-  console.log("DATA PING TABLE", data);
-
   const renderRow = (details, network) => {
-    console.log("DATA details", details);
-
     return (
       <Table.Row key={network}>
         <Table.Cell>{CHAIN_DATA[network].chainName}</Table.Cell>
-        <Table.Cell>
-          {details[0] ? details[0].attributes.sender : "-"}
-        </Table.Cell>
+        <Table.Cell>{details[0] ? details[0].get("sender") : "-"}</Table.Cell>
         <Table.Cell>
           {details[0] ? details[0].createdAt.toLocaleString() : "-"}
         </Table.Cell>
         <Table.Cell>
-          {details[0] ? details[0].attributes.current_count : 0}
+          {details[0] ? details[0].get("current_count") : 0}
         </Table.Cell>
         <Table.Cell>
           <Button
+            style={{ background: "#041836", color: "white" }}
             onClick={() => ping(network)}
             disabled={Boolean(transactionState.loading) || !connected} //OR NO WALLET
           >

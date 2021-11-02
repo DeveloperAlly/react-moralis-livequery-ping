@@ -1,9 +1,8 @@
 import React from "react";
 import ReactPlayer from "react-player";
 import { useRouter } from "next/router";
-import styles from "../../styles/Home.module.css";
 import Layout from "./Layout";
-import { Header, Button, Icon, Label } from "semantic-ui-react";
+import { Header, Button, Icon } from "semantic-ui-react";
 import "semantic-ui-css/semantic.min.css";
 
 const ErrorPage = () => {
@@ -15,13 +14,14 @@ const ErrorPage = () => {
           display: "flex",
           flexDirection: "column",
           alignItems: "center",
+          marginBottom: "100px",
         }}
       >
         <Header as="h2" style={{ paddingTop: "40px" }}>
           Sorry - an error occurred!
         </Header>
         <Button
-          style={{ backgroundColor: "royalblue", color: "white" }}
+          style={{ backgroundColor: "#B7E803", color: "white" }}
           icon
           size="large"
           onClick={() => router.push("/")}

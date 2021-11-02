@@ -1,7 +1,19 @@
 import React, { useEffect } from "react";
 import { Message, Icon } from "semantic-ui-react";
+import useInterval from "../api/useInterval";
+import { INITIAL_TRANSACTION_STATE } from "../api/utils/dataMaps";
 
-const StatusMessage = ({ status, ...props }) => {
+//** TODO: clear error and success messages after a timeout period properly - handle state */
+const StatusMessage = ({ status, setTransactionState, ...props }) => {
+  const REFRESH_INTERVAL = 40000;
+  useInterval(async () => {
+    {
+      if (!status.loading && !status.disableTimeout) {
+        setTransactionState(INITIAL_TRANSACTION_STATE);
+      }
+    }
+  }, REFRESH_INTERVAL);
+
   return (
     <>
       {status ? (
